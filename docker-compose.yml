@@ -40,7 +40,7 @@ services:
     environment:
       - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
     volumes:
-      - ./cluster-entrypoint.sh:/usr/loc1l/bin/cluster-entrypoint.sh
+      - ./cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
       - ./docker-data/rabbitmq3/data:/var/lib/rabbitmq:rw
       - ./docker-data/rabbitmq3/log:/var/log/rabbitmq:rw
     entrypoint: /usr/local/bin/cluster-entrypoint.sh
