@@ -16,7 +16,7 @@ services:
       - ${RABBITMQ_DATA_PATH}/rabbitmq1/data:/var/lib/rabbitmq:rw
       - ${RABBITMQ_DATA_PATH}/rabbitmq1/log:/var/log/rabbitmq:rw
     networks:
-      - mwnet
+      - mynet
     privileged: true
 
   rabbitmq2:
@@ -33,7 +33,7 @@ services:
       - ${RABBITMQ_DATA_PATH}/rabbitmq2/data:/var/lib/rabbitmq:rw
       - ${RABBITMQ_DATA_PATH}/rabbitmq2/log:/var/log/rabbitmq:rw
     networks:
-      - mwnet
+      - mynet
     entrypoint: /usr/local/bin/cluster-entrypoint.sh
     privileged: true
 
@@ -51,7 +51,7 @@ services:
       - ${RABBITMQ_DATA_PATH}/rabbitmq3/data:/var/lib/rabbitmq:rw
       - ${RABBITMQ_DATA_PATH}/rabbitmq3/log:/var/log/rabbitmq:rw
     networks:
-      - mwnet
+      - mynet
     entrypoint: /usr/local/bin/cluster-entrypoint.sh
     privileged: true
     
@@ -62,7 +62,7 @@ services:
     volumes:
       - ${HAPROXY_DEFAULT_PATH}/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     networks:
-      - mwnet
+      - mynet
     depends_on:
       - rabbitmq1
       - rabbitmq2
@@ -84,12 +84,12 @@ services:
       - ${MYSQL_DATA_PATH}:/var/lib/mysql
       - ${MYSQL_CONFIG_PATH}:/etc/mysql/conf.d
     networks:
-      - mwnet
-    port:
+      - mynet
+    ports:
       - 3306:3306
     privileged: true
 
   networks:
-    mwnet:
+    mynet:
       external:
         name: ${MW_NETWORK}
